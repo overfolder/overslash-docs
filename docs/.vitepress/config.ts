@@ -3,10 +3,8 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'Overslash',
   description: 'Documentation for Overslash',
-  base: '/docs/',
-
   head: [
-    ['link', { rel: 'icon', href: '/docs/favicon.ico' }],
+    ['link', { rel: 'icon', href: '/favicon.ico' }],
   ],
 
   themeConfig: {
