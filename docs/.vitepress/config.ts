@@ -8,7 +8,6 @@ export default defineConfig({
   ],
 
   themeConfig: {
-    logo: '/logo.svg',
     siteTitle: 'Overslash',
 
     nav: [
