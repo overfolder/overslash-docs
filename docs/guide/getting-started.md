@@ -48,7 +48,7 @@ export SIGNING_KEY=$(openssl rand -base64 32)
 ./overslash web
 ```
 
-Dashboard at <http://localhost:3000>. Stop with `Ctrl+C`; the binary leaves no state outside Postgres.
+Dashboard at `http://localhost:3000`. Stop with `Ctrl+C`; the binary leaves no state outside Postgres.
 
 ## 4. Connect an MCP client
 
