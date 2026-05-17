@@ -30,8 +30,8 @@ Sources of truth in `~/code/overfolder/overslash/`:
 
 ## guide/concepts/
 
-- [ ] `concepts/index.md` — add a simple ASCII or Mermaid diagram showing User → Agent → SubAgent → Action.
-- [ ] `concepts/identities.md` — distinguish static `osk_` keys vs. OAuth bearer tokens. Source: `SPEC.md` identity section + `crates/overslash-api/src/auth.rs`.
+- [x] `concepts/index.md` — add a simple ASCII or Mermaid diagram showing User → Agent → SubAgent → Action.
+- [x] `concepts/identities.md` — distinguish static `osk_` keys vs. OAuth bearer tokens. Source: `SPEC.md` identity section + `crates/overslash-api/src/auth.rs`.
 - [ ] `concepts/services-and-actions.md` — clarify the relationship between a service definition (YAML) and a runtime action. Cross-link `reference/service-registry.md`.
 - [ ] `concepts/secrets.md` — describe AES-256-GCM, versioning semantics, and "API never returns secret material" invariant. Source: `crates/overslash-core/src/secrets/*`.
 - [ ] `concepts/connections.md` — explain the difference between a secret (raw blob) and a connection (OAuth credential with refresh).

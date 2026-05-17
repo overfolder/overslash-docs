@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 
-export default defineConfig({
+export default withMermaid(defineConfig({
   title: 'Overslash',
   description: 'Documentation for Overslash — an identity, secrets, and authenticated-execution gateway for AI agents.',
   head: [
@@ -135,4 +136,4 @@ export default defineConfig({
       provider: 'local',
     },
   },
-})
+}))
