@@ -48,6 +48,64 @@ flowchart TB
     class action action
 ```
 
-A subagent inherits no more than its parent agent could grant; an agent inherits no more than its owning user has authorized. When a call runs out of standing permission it doesn't fail — it raises an **approval**. The originating user can always resolve it; an ancestor agent can too, but only inside its own permission boundary (a parent can never grant a child more than it holds itself). Every step lands in the **audit** log, attributed up the chain to the originating user.
+The rest of this page makes the diagram concrete: how permissions are named, how subagents inherit them, who can resolve an approval, and a walkthrough that ties them together.
+
+### Permission keys
+
+Every action call carries a key of the form `service:action:arg` — the `:arg` segment scopes the call to a specific resource.
+
+| Key | What it permits |
+|---|---|
+| `github:create_pull_request:overfolder/backend` | Open a PR against one specific repo |
+| `gmail:send_message:me` | Send mail from the caller's own mailbox |
+| `slack:send_message:C12345` | Post to one specific Slack channel |
+| `http:POST:api.stripe.com/v1/charges` | One HTTP call to one Stripe endpoint |
+
+Grants use the same shape, with `*` and `**` as wildcards so a single rule can cover many calls:
+
+| Grant | Covers |
+|---|---|
+| `gmail:*:*` | Every Gmail action against every mailbox |
+| `github:create_pull_request:*` | Open PRs against any repo |
+| `http:*:api.github.com/**` | Any HTTP verb to any GitHub API path |
+
+A call is allowed when the set of `allow` rules on the caller's ancestor chain collectively covers its key. A matching `deny` rule beats any allow.
+
+### Subagent inheritance
+
+When an agent spawns a subagent it sets a boolean `inherit_permissions` flag.
+
+- `inherit_permissions = false` — the subagent has its own rule set and must be granted services explicitly. Right choice for long-lived specialists where you want a minimum-privilege boundary that can't be widened by accident.
+- `inherit_permissions = true` — the subagent is skipped during rule lookup; the gateway uses the parent's rules. Right choice for ephemeral workers whose privileges should track the parent's exactly. The flag is read **live**, not snapshotted: if the parent gains a rule, an inheriting subagent picks it up on the next call.
+
+When an approval is later granted with `allow_remember`, the resulting rule is planted on the closest ancestor that does *not* inherit — never on a subagent that does. That way the rule survives the subagent being garbage-collected.
+
+### Resolving approvals
+
+If a call needs a key no ancestor allows, the gateway raises an **approval**, suspends the action, and waits.
+
+| Resolver | Eligible? |
+|---|---|
+| The originating user | Always |
+| An ancestor agent in the same chain | Yes |
+| A sibling or unrelated agent | No |
+| An org admin | Yes (any approval in the org) |
+
+Resolution is one of `allow` (one-shot), `deny`, `allow_remember` (creates a persistent rule with an optional TTL like `24h` or `30d`), or `bubble_up` (pass the decision to the next eligible resolver). Every outcome lands in the audit log against the originating user.
+
+The "ancestor agent" case is how an agent approves for its own subagent without bothering the human: a planning agent can grant its worker the narrow permission it needs to finish the task. Approvals only travel up the chain — a sibling agent or an unrelated user is never eligible.
+
+### Walkthrough
+
+User `alice` owns agent `claude-code`, which spawned subagent `researcher` with `inherit_permissions = true`. The researcher tries to call `github:create_pull_request:overfolder/backend`.
+
+1. The chain walk starts at `researcher`. `inherit_permissions = true`, so its rules are skipped.
+2. `claude-code` (its parent) holds no matching rule. The walk reports a **gap** — the requested key isn't covered.
+3. An approval is raised, scoped to `github:create_pull_request:overfolder/backend`. Initial resolver: `alice`.
+4. Either alice resolves it from the dashboard, or `claude-code` resolves it directly via the `overslash_approve` MCP tool — both are eligible because `claude-code` is an ancestor in the chain.
+5. The resolver chooses `allow_remember`, optionally widens the pattern to `github:create_pull_request:overfolder/*`, and sets TTL `30d`. The rule is planted on `claude-code` (the closest non-inheriting ancestor). The suspended call resumes.
+6. From here on, any descendant of `claude-code` — including a brand-new subagent spawned tomorrow — calling that key against any repo under `overfolder/*` passes the chain walk without raising another approval, until the TTL expires.
+
+---
 
 The pages below cover each primitive in isolation; come back here when you need to see how they fit together.
