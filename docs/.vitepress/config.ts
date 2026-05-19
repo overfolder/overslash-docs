@@ -2,10 +2,11 @@ import { defineConfig } from 'vitepress'
 import { withMermaid } from 'vitepress-plugin-mermaid'
 
 export default withMermaid(defineConfig({
+  base: '/docs/',
   title: 'Overslash',
   description: 'Documentation for Overslash — an identity, secrets, and authenticated-execution gateway for AI agents.',
   head: [
-    ['link', { rel: 'icon', href: '/favicon.ico' }],
+    ['link', { rel: 'icon', href: '/docs/favicon.ico' }],
   ],
 
   // FOLLOW_UPS.md is a maintainer punch list, not a published page.
