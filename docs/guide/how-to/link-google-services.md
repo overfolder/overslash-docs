@@ -10,15 +10,23 @@ This is the **"use your own OAuth"** path. If your Overslash deployment already 
 
 See [Connections](../concepts/connections.md) for the underlying model and [Services & Actions](../concepts/services-and-actions.md) for how a connection becomes callable actions.
 
+::: tip Looking to connect a client instead?
+Want to connect to Overslash from Claude Code, Cursor, ChatGPT, or another tool so it can act as an agent? See [Connect to Overslash from an MCP client](../../connect/index.md).
+:::
+
 ## Before you begin
 
 You'll need:
 
+- Access to an **Overslash dashboard**. The quickest path is **Overslash Cloud** at [cloud.overslash.com](https://cloud.overslash.com) — sign in and you're ready, with nothing to run or host. If you run Overslash yourself, use your local dashboard (`http://localhost:3000`) or your self-hosted URL instead.
 - A **Google account** with access to [Google Cloud Console](https://console.cloud.google.com).
-- Your **Overslash dashboard URL**. For a local install this is `http://localhost:3000`; for a hosted deployment it's whatever `PUBLIC_URL` is set to (e.g. `https://overslash.example.com`).
 
 ::: tip Your Overslash base URL
-Throughout this guide, **`<your-overslash>`** means your Overslash base URL — `http://localhost:3000` locally, or your public host in production. You'll need it again when you register the redirect URI in Step 5.
+Throughout this guide, **`<your-overslash>`** means the base URL of your Overslash dashboard. You'll need it again when you register the redirect URI in Step 5:
+
+- **Overslash Cloud** → `https://cloud.overslash.com`
+- **Local install** → `http://localhost:3000`
+- **Self-hosted** → your own `PUBLIC_URL` (e.g. `https://overslash.example.com`)
 :::
 
 ## Step 1 — Start the connection in Overslash
@@ -87,10 +95,13 @@ Gmail's `readonly`, `send`, and `modify` scopes are **restricted** under Google'
 4. Under **Authorized redirect URIs**, click **Add URI** and enter Overslash's OAuth callback — `<your-overslash>` followed by `/v1/oauth/callback`:
 
    ```text
+   # Overslash Cloud
+   https://cloud.overslash.com/v1/oauth/callback
+
    # Local install
    http://localhost:3000/v1/oauth/callback
 
-   # Hosted deployment
+   # Self-hosted deployment
    https://overslash.example.com/v1/oauth/callback
    ```
 
@@ -133,7 +144,7 @@ From here the service's actions are available to your agents — try a read acti
 
 ## Troubleshooting
 
-- **`redirect_uri_mismatch`** — The redirect URI in Google Cloud doesn't exactly match `<your-overslash>/v1/oauth/callback`. Recheck the scheme, host, port, and trailing slash, and confirm your deployment's `PUBLIC_URL` matches the URL you registered.
+- **`redirect_uri_mismatch`** — The redirect URI in Google Cloud doesn't exactly match `<your-overslash>/v1/oauth/callback`. Recheck the scheme, host, port, and trailing slash. On Overslash Cloud this is always `https://cloud.overslash.com/v1/oauth/callback`; if you self-host, confirm your deployment's `PUBLIC_URL` matches the URL you registered.
 - **`access_blocked` / "app isn't verified"** — Your account isn't a test user on the consent screen, or the app needs verification. Add yourself under **Audience** / **Test users** (Step 4).
 - **Missing or denied scope** — If an action fails for lack of a scope, add it under **Data access** in Google Cloud, then reconnect from the service's **Credentials** tab to re-run consent.
 - **Wrong project** — If the OAuth client or enabled API seems to be missing, confirm the project picker is set to the project you created in Step 3.
