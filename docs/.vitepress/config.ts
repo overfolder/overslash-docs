@@ -50,6 +50,7 @@ export default withMermaid(defineConfig({
           collapsed: false,
           items: [
             { text: 'Link Google services', link: '/guide/how-to/link-google-services' },
+            { text: 'Connect an MCP client', link: '/connect/' },
           ],
         },
         {
@@ -77,6 +78,12 @@ export default withMermaid(defineConfig({
             { text: 'OpenClaw', link: '/connect/openclaw' },
             { text: 'Other MCP clients', link: '/connect/other-mcp-clients' },
             { text: 'Stdio fallback', link: '/connect/stdio-fallback' },
+          ],
+        },
+        {
+          text: 'Connect a service',
+          items: [
+            { text: 'Link Google services', link: '/guide/how-to/link-google-services' },
           ],
         },
       ],

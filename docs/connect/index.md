@@ -31,6 +31,12 @@ Details: [Reference → Architecture → MCP OAuth transport](../reference/archi
 - [Other MCP clients](./other-mcp-clients.md)
 - [Stdio fallback](./stdio-fallback.md) — for clients that don't speak HTTP MCP yet
 
+## Connecting a service vs. connecting a client
+
+This section is about connecting an MCP **client** (so it can act as an agent). Connecting a **service** — giving Overslash access to Gmail, Google Drive, Google Calendar, and the like — is a separate flow you run from the dashboard.
+
+- Linking a Google service? See [How-to → Link Google services](../guide/how-to/link-google-services.md).
+
 ## Local-dev URL
 
 For local development, replace `https://<your-overslash>/mcp` with `http://localhost:3000/mcp` in any of the snippets below.
