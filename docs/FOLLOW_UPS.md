@@ -82,18 +82,20 @@ Sources of truth in `~/code/overfolder/overslash/`:
 
 ### reference/mcp-tools/
 
-- [ ] `mcp-tools/index.md` — write a "when to use which" decision table.
-- [ ] `mcp-tools/overslash_search.md` — define query shape, result shape, ranking notes. Source: `crates/overslash-mcp/src/tools/search.rs`.
-- [ ] `mcp-tools/overslash_call.md` — three example shapes: service+action call, raw HTTP call, approval resume. Document the success/approval-raised/error result variants. Source: `crates/overslash-mcp/src/tools/call.rs`.
-- [ ] `mcp-tools/overslash_read.md` — list the server-side check that rejects writes. Source: `crates/overslash-mcp/src/tools/read.rs`.
-- [ ] `mcp-tools/overslash_auth.md` — full `whoami` and `service_status` payloads. Source: `crates/overslash-mcp/src/tools/auth.rs`.
-- [ ] `mcp-tools/overslash_approve.md` — clarify which identities are allowed to call this tool (user-bound clients only, not other agents). Source: `crates/overslash-mcp/src/tools/approve.rs`.
+> Note: the MCP tools are registered in `crates/overslash-api/src/routes/mcp.rs` (names, descriptions, input schemas), with result/payload shapes in sibling route files (`search.rs`, `actions.rs`, `approvals.rs`, `identities.rs`, `services/platform_services.rs`). The earlier `crates/overslash-mcp/src/tools/*.rs` paths below were wrong — corrected inline.
+
+- [x] `mcp-tools/index.md` — write a "when to use which" decision table.
+- [x] `mcp-tools/overslash_search.md` — define query shape, result shape, ranking notes. Source: `crates/overslash-api/src/routes/search.rs` + `mcp.rs`.
+- [x] `mcp-tools/overslash_call.md` — three example shapes: service+action call, raw HTTP call, approval resume. Document the success/approval-raised/error result variants. Source: `crates/overslash-api/src/routes/mcp.rs` (`dispatch_call`) + `actions.rs` (`CallResponse`). Note: raw HTTP is **not** expressible through the MCP tool's schema (REST-only); documented as such with a pointer to `rest-api/actions.md`.
+- [x] `mcp-tools/overslash_read.md` — list the server-side check that rejects writes. Source: `crates/overslash-api/src/routes/mcp.rs` (`dispatch_read`, `require_risk: "read"`).
+- [x] `mcp-tools/overslash_auth.md` — full `whoami` and `service_status` payloads. Source: `crates/overslash-api/src/routes/identities.rs` (`whoami`) + `services/platform_services.rs` (`ServiceInstanceDetail`).
+- [x] `mcp-tools/overslash_approve.md` — clarify which identities are allowed to call this tool. **Corrected vs. the original note:** the source makes `overslash_approve` the downstream-delegation tool (caller must be an ancestor of the requester); "user-bound clients only" actually describes the hidden `overslash_approve_self`, now documented inline. Source: `crates/overslash-api/src/routes/mcp.rs` + `approvals.rs` (`resolve_approval`, `ApprovalResponse`).
 
 ### reference/architecture/
 
-- [ ] `architecture/overview.md` — one Mermaid diagram of components + a sequence diagram for a sample action call. Source: `SPEC.md` + `CLAUDE.md` navigation.
-- [ ] `architecture/mcp-oauth-transport.md` — port the public-facing parts of `docs/design/mcp-oauth-transport.md`. Decide which internal details stay in the source repo.
-- [ ] `architecture/database-schema.md` — generate an ER-style summary from the SQLx migrations. Source: `crates/overslash-db/migrations/*.sql`.
+- [x] `architecture/overview.md` — one Mermaid diagram of components + a sequence diagram for a sample action call. Source: `SPEC.md` + `CLAUDE.md` navigation.
+- [x] `architecture/mcp-oauth-transport.md` — port the public-facing parts of `docs/design/mcp-oauth-transport.md`. Decide which internal details stay in the source repo.
+- ~~`architecture/database-schema.md`~~ — removed (not published). The database schema and internal storage details are intentionally kept out of the public docs.
 
 ---
 

@@ -46,6 +46,14 @@ export default withMermaid(defineConfig({
           ],
         },
         {
+          text: 'How-to guides',
+          collapsed: false,
+          items: [
+            { text: 'Link Google services', link: '/guide/how-to/link-google-services' },
+            { text: 'Connect an MCP client', link: '/connect/' },
+          ],
+        },
+        {
           text: 'Self-hosting',
           collapsed: true,
           items: [
@@ -70,6 +78,12 @@ export default withMermaid(defineConfig({
             { text: 'OpenClaw', link: '/connect/openclaw' },
             { text: 'Other MCP clients', link: '/connect/other-mcp-clients' },
             { text: 'Stdio fallback', link: '/connect/stdio-fallback' },
+          ],
+        },
+        {
+          text: 'Connect a service',
+          items: [
+            { text: 'Link Google services', link: '/guide/how-to/link-google-services' },
           ],
         },
       ],
@@ -118,7 +132,6 @@ export default withMermaid(defineConfig({
           items: [
             { text: 'Overview', link: '/reference/architecture/overview' },
             { text: 'MCP OAuth transport', link: '/reference/architecture/mcp-oauth-transport' },
-            { text: 'Database schema', link: '/reference/architecture/database-schema' },
           ],
         },
       ],
