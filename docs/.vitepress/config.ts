@@ -118,7 +118,6 @@ export default withMermaid(defineConfig({
           items: [
             { text: 'Overview', link: '/reference/architecture/overview' },
             { text: 'MCP OAuth transport', link: '/reference/architecture/mcp-oauth-transport' },
-            { text: 'Database schema', link: '/reference/architecture/database-schema' },
           ],
         },
       ],

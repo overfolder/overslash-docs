@@ -91,9 +91,9 @@ Sources of truth in `~/code/overfolder/overslash/`:
 
 ### reference/architecture/
 
-- [ ] `architecture/overview.md` — one Mermaid diagram of components + a sequence diagram for a sample action call. Source: `SPEC.md` + `CLAUDE.md` navigation.
-- [ ] `architecture/mcp-oauth-transport.md` — port the public-facing parts of `docs/design/mcp-oauth-transport.md`. Decide which internal details stay in the source repo.
-- [ ] `architecture/database-schema.md` — generate an ER-style summary from the SQLx migrations. Source: `crates/overslash-db/migrations/*.sql`.
+- [x] `architecture/overview.md` — one Mermaid diagram of components + a sequence diagram for a sample action call. Source: `SPEC.md` + `CLAUDE.md` navigation.
+- [x] `architecture/mcp-oauth-transport.md` — port the public-facing parts of `docs/design/mcp-oauth-transport.md`. Decide which internal details stay in the source repo.
+- ~~`architecture/database-schema.md`~~ — removed (not published). The database schema and internal storage details are intentionally kept out of the public docs.
 
 ---
 
