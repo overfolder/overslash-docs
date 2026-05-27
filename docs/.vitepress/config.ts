@@ -46,6 +46,13 @@ export default withMermaid(defineConfig({
           ],
         },
         {
+          text: 'How-to guides',
+          collapsed: false,
+          items: [
+            { text: 'Link Google services', link: '/guide/how-to/link-google-services' },
+          ],
+        },
+        {
           text: 'Self-hosting',
           collapsed: true,
           items: [
