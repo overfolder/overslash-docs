@@ -18,13 +18,13 @@ Want to connect to Overslash from Claude Code, Cursor, ChatGPT, or another tool 
 
 You'll need:
 
-- Access to an **Overslash dashboard**. The quickest path is **Overslash Cloud** at [cloud.overslash.com](https://cloud.overslash.com) — sign in and you're ready, with nothing to run or host. If you run Overslash yourself, use your local dashboard (`http://localhost:3000`) or your self-hosted URL instead.
+- Access to an **Overslash dashboard**. The quickest path is **Overslash Cloud** at [app.overslash.com](https://app.overslash.com) — sign in and you're ready, with nothing to run or host. If you run Overslash yourself, use your local dashboard (`http://localhost:3000`) or your self-hosted URL instead.
 - A **Google account** with access to [Google Cloud Console](https://console.cloud.google.com).
 
 ::: tip Your Overslash base URL
 Throughout this guide, **`<your-overslash>`** means the base URL of your Overslash dashboard. You'll need it again when you register the redirect URI in Step 5:
 
-- **Overslash Cloud** → `https://cloud.overslash.com`
+- **Overslash Cloud** → `https://app.overslash.com`
 - **Local install** → `http://localhost:3000`
 - **Self-hosted** → your own `PUBLIC_URL` (e.g. `https://overslash.example.com`)
 :::
@@ -96,7 +96,7 @@ Gmail's `readonly`, `send`, and `modify` scopes are **restricted** under Google'
 
    ```text
    # Overslash Cloud
-   https://cloud.overslash.com/v1/oauth/callback
+   https://app.overslash.com/v1/oauth/callback
 
    # Local install
    http://localhost:3000/v1/oauth/callback
@@ -144,7 +144,7 @@ From here the service's actions are available to your agents — try a read acti
 
 ## Troubleshooting
 
-- **`redirect_uri_mismatch`** — The redirect URI in Google Cloud doesn't exactly match `<your-overslash>/v1/oauth/callback`. Recheck the scheme, host, port, and trailing slash. On Overslash Cloud this is always `https://cloud.overslash.com/v1/oauth/callback`; if you self-host, confirm your deployment's `PUBLIC_URL` matches the URL you registered.
+- **`redirect_uri_mismatch`** — The redirect URI in Google Cloud doesn't exactly match `<your-overslash>/v1/oauth/callback`. Recheck the scheme, host, port, and trailing slash. On Overslash Cloud this is always `https://app.overslash.com/v1/oauth/callback`; if you self-host, confirm your deployment's `PUBLIC_URL` matches the URL you registered.
 - **`access_blocked` / "app isn't verified"** — Your account isn't a test user on the consent screen, or the app needs verification. Add yourself under **Audience** / **Test users** (Step 4).
 - **Missing or denied scope** — If an action fails for lack of a scope, add it under **Data access** in Google Cloud, then reconnect from the service's **Credentials** tab to re-run consent.
 - **Wrong project** — If the OAuth client or enabled API seems to be missing, confirm the project picker is set to the project you created in Step 3.
