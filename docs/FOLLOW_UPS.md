@@ -49,15 +49,15 @@ Sources of truth in `~/code/overfolder/overslash/`:
 
 ## connect/
 
-- [ ] `connect/index.md` — diagram the OAuth handshake (sequence diagram between client, browser, and `/oauth/*`). Source: `docs/design/mcp-oauth-transport.md`.
-- [ ] `connect/claude-code.md` — verify the exact `claude mcp add --transport http overslash https://…` syntax against the current Claude Code release. Source: `README.md` L193–L201.
-- [ ] `connect/claude-ai.md` — document the custom-connector setup flow (where to paste the MCP URL, what the consent screen shows, what scopes are requested). Verify with a real connect attempt.
-- [ ] `connect/chatgpt.md` — document the connectors UI path for adding an HTTP MCP server. Verify with a real connect attempt.
-- [ ] `connect/cursor.md` — locate Cursor's current MCP config file path; confirm `"type": "http"` is the right discriminator.
-- [ ] `connect/windsurf.md` — same: confirm config file location and field names for Windsurf's current release.
-- [ ] `connect/openclaw.md` — confirm OpenClaw's MCP HTTP client config format. External source: `https://docs.openclaw.ai/cli/mcp`.
-- [ ] `connect/other-mcp-clients.md` — maintain a short matrix of "client → where its MCP config lives". Keep this fresh — the ecosystem moves.
-- [ ] `connect/stdio-fallback.md` — verify `overslash mcp login` end-to-end on macOS and Linux. Document the config file paths (`~/.config/overslash/mcp.json`, profile variant). Source: `README.md` L226–L231 + `crates/overslash-cli/src/mcp/login.rs`.
+- [x] `connect/index.md` — diagram the OAuth handshake (sequence diagram between client, browser, and `/oauth/*`). Source: `docs/design/mcp-oauth-transport.md`.
+- [x] `connect/claude-code.md` — verify the exact `claude mcp add --transport http overslash https://…` syntax against the current Claude Code release. Source: `README.md` L193–L201. Confirmed against current Claude Code MCP docs (flags precede the server name; `--scope local|project|user`).
+- [x] `connect/claude-ai.md` — document the custom-connector setup flow (where to paste the MCP URL, what the consent screen shows, what scopes are requested). UI path sourced from Anthropic's help center + maintainer's own working connect; single `mcp` scope.
+- [x] `connect/chatgpt.md` — document the connectors UI path for adding an HTTP MCP server. UI path (Developer Mode → Connectors → Create) sourced from OpenAI help docs + maintainer's own working connect.
+- [x] `connect/cursor.md` — located Cursor's MCP config (`~/.cursor/mcp.json` / `.cursor/mcp.json`). **Corrected:** Cursor keys remote servers off bare `url`, **not** `"type": "http"`.
+- [x] `connect/windsurf.md` — config at `~/.codeium/windsurf/mcp_config.json`. **Corrected:** Windsurf uses `serverUrl`, **not** `"type": "http"`.
+- [x] `connect/openclaw.md` — confirmed OpenClaw's HTTP config format (`mcp.servers`, `url` + `transport: "streamable-http"`, `openclaw mcp set/list/show/unset`). External source: `https://docs.openclaw.ai/cli/mcp`.
+- [x] `connect/other-mcp-clients.md` — added a per-client matrix of "client → config location → remote-URL field". Keep this fresh — the ecosystem moves.
+- [x] `connect/stdio-fallback.md` — documented `overslash mcp login` flow + config paths (`~/.config/overslash/mcp.json`, `mcp.<profile>.json` variant) from `crates/overslash-cli/src/mcp_login.rs` + `config.rs`. **Residual TODO in-page:** end-to-end run against a live build on macOS + Linux not yet performed (no release binary in the docs environment).
 
 ## reference/
 
