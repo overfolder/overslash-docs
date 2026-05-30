@@ -20,7 +20,7 @@ Sources of truth in `~/code/overfolder/overslash/`:
 
 ## Home & top-level
 
-- [ ] `index.md` — confirm the three feature blurbs match how we want to position Overslash externally. Pull a real screenshot or short video for the hero once the dashboard UI stabilises (`UI_SPEC.md`).
+- [x] `index.md` — feature blurbs restructured to foreground the permission-chain differentiator; added below-hero sections (problem / what it is / three surfaces / next steps) sourced from `SPEC.md` §1–2 + `README.md` L3–17. Hero screenshot/video still pending a stable dashboard UI — placeholder left in the frontmatter; tracked by the Cross-cutting screenshot item below.
 
 ## guide/
 
