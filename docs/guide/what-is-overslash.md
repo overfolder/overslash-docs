@@ -37,7 +37,7 @@ MCP is one way into Overslash, not the whole of it. The same backend is exposed 
 
 The MCP server speaks OAuth 2.1 over Streamable HTTP for modern clients, with a stdio fallback for clients that don't yet support it. The client authenticates as an **agent** identity — never as the user directly — so consent, revocation, and audit stay cleanly separated. See [Identities](./concepts/identities.md) for how that works.
 
-Across all three surfaces you get the same small set of meta-tools: `overslash_search` to discover services, `overslash_read` for read-class actions, `overslash_call` to run any action or resume a pending approval, and `overslash_auth` for identity introspection. So an agent uses the same handful of verbs whether it reaches Overslash over MCP, the CLI, or raw REST.
+Across all three surfaces you get the same small set of meta-tools: `overslash_search` to discover services, `overslash_read` for read-class actions, `overslash_call` to run any action or resume a pending approval, `overslash_auth` for identity introspection, and `overslash_approve` to resolve an approval raised by a descendant identity. So an agent uses the same handful of verbs whether it reaches Overslash over MCP, the CLI, or raw REST.
 
 For client-by-client setup, see [Connect an MCP client](../connect/index.md); for the wire protocol, see [MCP OAuth transport](../reference/architecture/mcp-oauth-transport.md).
 
