@@ -32,12 +32,12 @@ Sources of truth in `~/code/overfolder/overslash/`:
 
 - [x] `concepts/index.md` — add a simple ASCII or Mermaid diagram showing User → Agent → SubAgent → Action.
 - [x] `concepts/identities.md` — distinguish static `osk_` keys vs. OAuth bearer tokens. Source: `SPEC.md` identity section + `crates/overslash-api/src/auth.rs`.
-- [ ] `concepts/services-and-actions.md` — clarify the relationship between a service definition (YAML) and a runtime action. Cross-link `reference/service-registry.md`.
-- [ ] `concepts/secrets.md` — describe AES-256-GCM, versioning semantics, and "API never returns secret material" invariant. Source: `crates/overslash-core/src/secrets/*`.
-- [ ] `concepts/connections.md` — explain the difference between a secret (raw blob) and a connection (OAuth credential with refresh).
-- [ ] `concepts/approvals.md` — full lifecycle diagram (raised → notified → resolved → action resumes). Source: `SPEC.md` approvals section + `crates/overslash-core/src/approvals/*`.
-- [ ] `concepts/permissions.md` — diagram the inheritance chain and how an approval widens it. Define roles (viewer/operator/admin) precisely.
-- [ ] `concepts/audit.md` — list which events are logged and which are not.
+- [x] `concepts/services-and-actions.md` — clarify the relationship between a service definition (YAML) and a runtime action. Cross-link `reference/service-registry.md`.
+- [x] `concepts/secrets.md` — describe AES-256-GCM, versioning semantics, and "API never returns secret material" invariant. Source: `crates/overslash-core/src/secrets/*`.
+- [x] `concepts/connections.md` — explain the difference between a secret (raw blob) and a connection (OAuth credential with refresh).
+- [x] `concepts/approvals.md` — full lifecycle diagram (raised → notified → resolved → action resumes). Source: `SPEC.md` approvals section + `crates/overslash-core/src/approvals/*`.
+- [x] `concepts/permissions.md` — diagram the inheritance chain and how an approval widens it. Define roles (viewer/operator/admin) precisely.
+- [x] `concepts/audit.md` — list which events are logged and which are not.
 
 ## guide/self-hosting/
 
