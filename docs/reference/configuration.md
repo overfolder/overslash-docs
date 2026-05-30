@@ -15,8 +15,8 @@ Variable names may be renamed before the first tagged release.
 | Variable | Description |
 |---|---|
 | `DATABASE_URL` | Postgres connection string. |
-| `SECRETS_ENCRYPTION_KEY` | Base64-encoded 32-byte AES-256 key for the secrets vault. |
-| `SIGNING_KEY` | Base64-encoded 32-byte key used to sign OAuth and session tokens. |
+| `SECRETS_ENCRYPTION_KEY` | 64-character hex (32-byte) AES-256 key for the secrets vault. |
+| `SIGNING_KEY` | 64-character hex (32-byte) key used to sign OAuth and session tokens. |
 
 ## OAuth providers
 
