@@ -14,9 +14,15 @@ Every page in this section documents behavior that may change before the first t
 
 - [REST API](./rest-api/index.md) — HTTP endpoints by resource
 - [MCP tools](./mcp-tools/index.md) — the tools exposed at `POST /mcp`
-- [CLI](./cli.md) — `overslash serve | web | mcp | watch | admin`
-- [Service registry](./service-registry.md) — YAML schema for service definitions
+- [CLI](./cli.md) — `overslash serve | web | mcp | watch | services | call | admin`
+- [Service registry](./service-registry.md) — OpenAPI YAML format for service definitions
 - [Configuration](./configuration.md) — environment variables
 - [Architecture](./architecture/overview.md) — internals worth knowing
 
-<!-- TODO: see FOLLOW_UPS.md -->
+## OpenAPI specification
+
+::: info Planned
+A machine-readable OpenAPI specification for the REST API is planned for once the
+surface stabilises. Until it ships, the [REST API](./rest-api/index.md) pages are the
+authoritative reference. (No spec URL exists yet — this note is a placeholder.)
+:::
