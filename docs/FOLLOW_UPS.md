@@ -61,10 +61,10 @@ Sources of truth in `~/code/overfolder/overslash/`:
 
 ## reference/
 
-- [ ] `reference/index.md` — once the surface stabilises, link to an OpenAPI spec (currently TBD).
-- [ ] `reference/cli.md` — for each subcommand, list all flags with one-line descriptions. Source: `crates/overslash-cli/src/main.rs` (clap definitions).
-- [ ] `reference/service-registry.md` — write a complete JSON-Schema-style definition for the YAML format. Pair it with three worked examples from `services/`. Source: `services/github.yaml`, `services/gmail.yaml`, `services/slack.yaml` + `crates/overslash-core/src/services/loader.rs`.
-- [ ] `reference/configuration.md` — generate the full env-var matrix (variable, required/optional, default, since version). Source: `.env.example`.
+- [x] `reference/index.md` — once the surface stabilises, link to an OpenAPI spec (currently TBD). _Placeholder note added (no spec URL yet)._
+- [x] `reference/cli.md` — for each subcommand, list all flags with one-line descriptions. Source: `crates/overslash-cli/src/main.rs` (clap definitions). _Documented all 7 subcommands (serve/web/mcp/watch/services/call/admin) + global flags._
+- [x] `reference/service-registry.md` — write a complete JSON-Schema-style definition for the YAML format. Pair it with three worked examples from `services/`. Source: `services/github.yaml`, `services/gmail.yaml`, `services/slack.yaml` + `crates/overslash-core/src/services/loader.rs`. _Restructured to the real OpenAPI 3.1 + `x-overslash-*` format (loader is `crates/overslash-core/src/registry.rs` + `types/service.rs` + `openapi.rs`); examples = github (read) / slack (write) / synthetic `http` (raw passthrough)._
+- [x] `reference/configuration.md` — generate the full env-var matrix (variable, required/optional, default, since version). Source: `.env.example`. _Mirrors `.env.example`; "since version" column dropped (pre-release, no tagged releases)._
 
 ### reference/rest-api/
 
