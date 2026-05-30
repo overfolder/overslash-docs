@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://app.overslash.com/docs/sitemap.xml
+# LLM index: https://app.overslash.com/docs/llms.txt
