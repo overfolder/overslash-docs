@@ -20,51 +20,51 @@ Sources of truth in `~/code/overfolder/overslash/`:
 
 ## Home & top-level
 
-- [ ] `index.md` — confirm the three feature blurbs match how we want to position Overslash externally. Pull a real screenshot or short video for the hero once the dashboard UI stabilises (`UI_SPEC.md`).
+- [x] `index.md` — feature blurbs restructured to foreground the permission-chain differentiator; added below-hero sections (problem / what it is / three surfaces / next steps) sourced from `SPEC.md` §1–2 + `README.md` L3–17. Hero screenshot/video still pending a stable dashboard UI — placeholder left in the frontmatter; tracked by the Cross-cutting screenshot item below.
 
 ## guide/
 
-- [ ] `guide/what-is-overslash.md` — fill the four headings (who it's for / what it replaces / how it fits with MCP / where to go next) from `SPEC.md` §1–§2 + `README.md` L3–L17.
+- [x] `guide/what-is-overslash.md` — fill the four headings (who it's for / what it replaces / how it fits with MCP / where to go next) from `SPEC.md` §1–§2 + `README.md` L3–L17.
 - [ ] `guide/getting-started.md` — fill the four numbered steps from `README.md` L47–L98 (`overslash web` quickstart). Include verified-working `claude mcp add` invocation.
-- [ ] `guide/status-and-roadmap.md` — generate "What ships today" from `STATUS.md`. Confirm "What's planned" and "What's out of scope" with maintainers — `SPEC.md` is aspirational, not a roadmap promise.
+- [ ] `guide/status-and-roadmap.md` — generate "What ships today" from `STATUS.md`. Confirm "What's planned" and "What's out of scope" with maintainers — `SPEC.md` is aspirational, not a roadmap promise. **"What ships today" done (user-facing altitude); "What's planned" and "What's out of scope" left as stubs pending maintainer confirmation — see the `TODO (maintainer confirmation)` comments on the page.**
 
 ## guide/concepts/
 
 - [x] `concepts/index.md` — add a simple ASCII or Mermaid diagram showing User → Agent → SubAgent → Action.
 - [x] `concepts/identities.md` — distinguish static `osk_` keys vs. OAuth bearer tokens. Source: `SPEC.md` identity section + `crates/overslash-api/src/auth.rs`.
-- [ ] `concepts/services-and-actions.md` — clarify the relationship between a service definition (YAML) and a runtime action. Cross-link `reference/service-registry.md`.
-- [ ] `concepts/secrets.md` — describe AES-256-GCM, versioning semantics, and "API never returns secret material" invariant. Source: `crates/overslash-core/src/secrets/*`.
-- [ ] `concepts/connections.md` — explain the difference between a secret (raw blob) and a connection (OAuth credential with refresh).
-- [ ] `concepts/approvals.md` — full lifecycle diagram (raised → notified → resolved → action resumes). Source: `SPEC.md` approvals section + `crates/overslash-core/src/approvals/*`.
-- [ ] `concepts/permissions.md` — diagram the inheritance chain and how an approval widens it. Define roles (viewer/operator/admin) precisely.
-- [ ] `concepts/audit.md` — list which events are logged and which are not.
+- [x] `concepts/services-and-actions.md` — clarify the relationship between a service definition (YAML) and a runtime action. Cross-link `reference/service-registry.md`.
+- [x] `concepts/secrets.md` — describe AES-256-GCM, versioning semantics, and "API never returns secret material" invariant. Source: `crates/overslash-core/src/secrets/*`.
+- [x] `concepts/connections.md` — explain the difference between a secret (raw blob) and a connection (OAuth credential with refresh).
+- [x] `concepts/approvals.md` — full lifecycle diagram (raised → notified → resolved → action resumes). Source: `SPEC.md` approvals section + `crates/overslash-core/src/approvals/*`.
+- [x] `concepts/permissions.md` — diagram the inheritance chain and how an approval widens it. Define roles (viewer/operator/admin) precisely.
+- [x] `concepts/audit.md` — list which events are logged and which are not.
 
 ## guide/self-hosting/
 
-- [ ] `self-hosting/deployment.md` — write three concrete walk-throughs (single-binary, Docker Compose, Kubernetes). Reference `infra/` for OpenTofu and `docker/docker-compose.dev.yml` for compose patterns.
-- [ ] `self-hosting/configuration.md` — generate a complete env-var table from `.env.example`. Mark which are required vs. optional vs. deprecated.
-- [ ] `self-hosting/keys-and-rotation.md` — verify the `overslash admin reencrypt` flow end-to-end; document failure modes. Source: `crates/overslash-cli/src/admin/*`.
-- [ ] `self-hosting/database.md` — Postgres version matrix, connection-pool sizing, backup recipe. Cover migrations: when to use `make migrate` vs. auto-migrate-on-boot.
-- [ ] `self-hosting/monitoring.md` — list metric names emitted by `overslash-metrics`. Source: `crates/overslash-metrics/src/*`.
+- [x] `self-hosting/deployment.md` — write three concrete walk-throughs (single-binary, Docker Compose, Kubernetes). Reference `infra/` for OpenTofu and `docker/docker-compose.dev.yml` for compose patterns. Done: single-binary + Docker Compose as full walk-throughs, hand-authored reference K8s manifests (no manifests ship), and a full GCP Cloud Run/OpenTofu walk-through from `infra/`.
+- [x] `self-hosting/configuration.md` — generate a complete env-var table from `.env.example`. Mark which are required vs. optional vs. deprecated. Done: operator-relevant superset (`.env.example` + `config.rs`); no deprecated vars today, internal/test-only flags footnoted.
+- [x] `self-hosting/keys-and-rotation.md` — verify the `overslash admin reencrypt` flow end-to-end; document failure modes. Source: `crates/overslash-cli/src/admin/*`. Done: keys are 64-char hex; full 3-deploy rotation + failure modes. (Source path corrected: the flow lives in `crates/overslash-cli/src/{main.rs,reencrypt.rs}` + `crates/overslash-api/src/services/key_rotation.rs` + `crates/overslash-core/src/crypto.rs`; there is no `src/admin/` dir.)
+- [x] `self-hosting/database.md` — Postgres version matrix, connection-pool sizing, backup recipe. Cover migrations: when to use `make migrate` vs. auto-migrate-on-boot. Done: 14+ min / 16 recommended (pgvector required); pool not env-tunable (sqlx ~10/process); `pg_dump` recipe.
+- [x] `self-hosting/monitoring.md` — list metric names emitted by `overslash-metrics`. Source: `crates/overslash-metrics/src/*`. Done: full metric tables, `/internal/metrics` endpoint, `/health` + `/ready`, recommended alerts.
 
 ## connect/
 
-- [ ] `connect/index.md` — diagram the OAuth handshake (sequence diagram between client, browser, and `/oauth/*`). Source: `docs/design/mcp-oauth-transport.md`.
-- [ ] `connect/claude-code.md` — verify the exact `claude mcp add --transport http overslash https://…` syntax against the current Claude Code release. Source: `README.md` L193–L201.
-- [ ] `connect/claude-ai.md` — document the custom-connector setup flow (where to paste the MCP URL, what the consent screen shows, what scopes are requested). Verify with a real connect attempt.
-- [ ] `connect/chatgpt.md` — document the connectors UI path for adding an HTTP MCP server. Verify with a real connect attempt.
-- [ ] `connect/cursor.md` — locate Cursor's current MCP config file path; confirm `"type": "http"` is the right discriminator.
-- [ ] `connect/windsurf.md` — same: confirm config file location and field names for Windsurf's current release.
-- [ ] `connect/openclaw.md` — confirm OpenClaw's MCP HTTP client config format. External source: `https://docs.openclaw.ai/cli/mcp`.
-- [ ] `connect/other-mcp-clients.md` — maintain a short matrix of "client → where its MCP config lives". Keep this fresh — the ecosystem moves.
-- [ ] `connect/stdio-fallback.md` — verify `overslash mcp login` end-to-end on macOS and Linux. Document the config file paths (`~/.config/overslash/mcp.json`, profile variant). Source: `README.md` L226–L231 + `crates/overslash-cli/src/mcp/login.rs`.
+- [x] `connect/index.md` — diagram the OAuth handshake (sequence diagram between client, browser, and `/oauth/*`). Source: `docs/design/mcp-oauth-transport.md`.
+- [x] `connect/claude-code.md` — verify the exact `claude mcp add --transport http overslash https://…` syntax against the current Claude Code release. Source: `README.md` L193–L201. Confirmed against current Claude Code MCP docs (flags precede the server name; `--scope local|project|user`).
+- [x] `connect/claude-ai.md` — document the custom-connector setup flow (where to paste the MCP URL, what the consent screen shows, what scopes are requested). UI path sourced from Anthropic's help center + maintainer's own working connect; single `mcp` scope.
+- [x] `connect/chatgpt.md` — document the connectors UI path for adding an HTTP MCP server. UI path (Developer Mode → Connectors → Create) sourced from OpenAI help docs + maintainer's own working connect.
+- [x] `connect/cursor.md` — located Cursor's MCP config (`~/.cursor/mcp.json` / `.cursor/mcp.json`). **Corrected:** Cursor keys remote servers off bare `url`, **not** `"type": "http"`.
+- [x] `connect/windsurf.md` — config at `~/.codeium/windsurf/mcp_config.json`. **Corrected:** Windsurf uses `serverUrl`, **not** `"type": "http"`.
+- [x] `connect/openclaw.md` — confirmed OpenClaw's HTTP config format (`mcp.servers`, `url` + `transport: "streamable-http"`, `openclaw mcp set/list/show/unset`). External source: `https://docs.openclaw.ai/cli/mcp`.
+- [x] `connect/other-mcp-clients.md` — added a per-client matrix of "client → config location → remote-URL field". Keep this fresh — the ecosystem moves.
+- [x] `connect/stdio-fallback.md` — documented `overslash mcp login` flow + config paths (`~/.config/overslash/mcp.json`, `mcp.<profile>.json` variant) from `crates/overslash-cli/src/mcp_login.rs` + `config.rs`. **Residual TODO in-page:** end-to-end run against a live build on macOS + Linux not yet performed (no release binary in the docs environment).
 
 ## reference/
 
-- [ ] `reference/index.md` — once the surface stabilises, link to an OpenAPI spec (currently TBD).
-- [ ] `reference/cli.md` — for each subcommand, list all flags with one-line descriptions. Source: `crates/overslash-cli/src/main.rs` (clap definitions).
-- [ ] `reference/service-registry.md` — write a complete JSON-Schema-style definition for the YAML format. Pair it with three worked examples from `services/`. Source: `services/github.yaml`, `services/gmail.yaml`, `services/slack.yaml` + `crates/overslash-core/src/services/loader.rs`.
-- [ ] `reference/configuration.md` — generate the full env-var matrix (variable, required/optional, default, since version). Source: `.env.example`.
+- [x] `reference/index.md` — once the surface stabilises, link to an OpenAPI spec (currently TBD). _Placeholder note added (no spec URL yet)._
+- [x] `reference/cli.md` — for each subcommand, list all flags with one-line descriptions. Source: `crates/overslash-cli/src/main.rs` (clap definitions). _Documented all 7 subcommands (serve/web/mcp/watch/services/call/admin) + global flags._
+- [x] `reference/service-registry.md` — write a complete JSON-Schema-style definition for the YAML format. Pair it with three worked examples from `services/`. Source: `services/github.yaml`, `services/gmail.yaml`, `services/slack.yaml` + `crates/overslash-core/src/services/loader.rs`. _Restructured to the real OpenAPI 3.1 + `x-overslash-*` format (loader is `crates/overslash-core/src/registry.rs` + `types/service.rs` + `openapi.rs`); examples = github (read) / slack (write) / synthetic `http` (raw passthrough)._
+- [x] `reference/configuration.md` — generate the full env-var matrix (variable, required/optional, default, since version). Source: `.env.example`. _Mirrors `.env.example`; "since version" column dropped (pre-release, no tagged releases)._
 
 ### reference/rest-api/
 

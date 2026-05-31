@@ -43,8 +43,8 @@ Set the three required env vars and run the binary. The API auto-applies migrati
 
 ```bash
 export DATABASE_URL=postgres://postgres:overslash@localhost:5432/overslash
-export SECRETS_ENCRYPTION_KEY=$(openssl rand -base64 32)
-export SIGNING_KEY=$(openssl rand -base64 32)
+export SECRETS_ENCRYPTION_KEY=$(openssl rand -hex 32)
+export SIGNING_KEY=$(openssl rand -hex 32)
 ./overslash web
 ```
 
