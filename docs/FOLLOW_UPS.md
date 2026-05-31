@@ -41,11 +41,11 @@ Sources of truth in `~/code/overfolder/overslash/`:
 
 ## guide/self-hosting/
 
-- [ ] `self-hosting/deployment.md` — write three concrete walk-throughs (single-binary, Docker Compose, Kubernetes). Reference `infra/` for OpenTofu and `docker/docker-compose.dev.yml` for compose patterns.
-- [ ] `self-hosting/configuration.md` — generate a complete env-var table from `.env.example`. Mark which are required vs. optional vs. deprecated.
-- [ ] `self-hosting/keys-and-rotation.md` — verify the `overslash admin reencrypt` flow end-to-end; document failure modes. Source: `crates/overslash-cli/src/admin/*`.
-- [ ] `self-hosting/database.md` — Postgres version matrix, connection-pool sizing, backup recipe. Cover migrations: when to use `make migrate` vs. auto-migrate-on-boot.
-- [ ] `self-hosting/monitoring.md` — list metric names emitted by `overslash-metrics`. Source: `crates/overslash-metrics/src/*`.
+- [x] `self-hosting/deployment.md` — write three concrete walk-throughs (single-binary, Docker Compose, Kubernetes). Reference `infra/` for OpenTofu and `docker/docker-compose.dev.yml` for compose patterns. Done: single-binary + Docker Compose as full walk-throughs, hand-authored reference K8s manifests (no manifests ship), and a full GCP Cloud Run/OpenTofu walk-through from `infra/`.
+- [x] `self-hosting/configuration.md` — generate a complete env-var table from `.env.example`. Mark which are required vs. optional vs. deprecated. Done: operator-relevant superset (`.env.example` + `config.rs`); no deprecated vars today, internal/test-only flags footnoted.
+- [x] `self-hosting/keys-and-rotation.md` — verify the `overslash admin reencrypt` flow end-to-end; document failure modes. Source: `crates/overslash-cli/src/admin/*`. Done: keys are 64-char hex; full 3-deploy rotation + failure modes. (Source path corrected: the flow lives in `crates/overslash-cli/src/{main.rs,reencrypt.rs}` + `crates/overslash-api/src/services/key_rotation.rs` + `crates/overslash-core/src/crypto.rs`; there is no `src/admin/` dir.)
+- [x] `self-hosting/database.md` — Postgres version matrix, connection-pool sizing, backup recipe. Cover migrations: when to use `make migrate` vs. auto-migrate-on-boot. Done: 14+ min / 16 recommended (pgvector required); pool not env-tunable (sqlx ~10/process); `pg_dump` recipe.
+- [x] `self-hosting/monitoring.md` — list metric names emitted by `overslash-metrics`. Source: `crates/overslash-metrics/src/*`. Done: full metric tables, `/internal/metrics` endpoint, `/health` + `/ready`, recommended alerts.
 
 ## connect/
 
