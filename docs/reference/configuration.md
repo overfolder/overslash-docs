@@ -25,7 +25,7 @@ These have no safe default — the server will not start without them.
 | Variable | Required | Default | Description |
 |---|---|---|---|
 | `HOST` | no | `0.0.0.0` | Address to bind on. |
-| `PORT` | no | `3000` | Port to bind on. (`serve` defaults to `8080`, `web` to `7171` — see the [CLI](./cli.md#overslash-web) for `web`'s precedence rules.) |
+| `PORT` | no | `8080` | Port to bind on. `8080` is the compiled fallback for `serve` when `PORT` is unset; `.env.example` ships `PORT=3000` as a starting value. `web` does **not** use this default — it resolves its port as `--port` > `OVERSLASH_WEB_PORT` > `PORT` > `7171` (see the [CLI](./cli.md#overslash-web)). |
 
 ## Approvals
 
