@@ -24,9 +24,9 @@ Sources of truth in `~/code/overfolder/overslash/`:
 
 ## guide/
 
-- [ ] `guide/what-is-overslash.md` — fill the four headings (who it's for / what it replaces / how it fits with MCP / where to go next) from `SPEC.md` §1–§2 + `README.md` L3–L17.
+- [x] `guide/what-is-overslash.md` — fill the four headings (who it's for / what it replaces / how it fits with MCP / where to go next) from `SPEC.md` §1–§2 + `README.md` L3–L17.
 - [ ] `guide/getting-started.md` — fill the four numbered steps from `README.md` L47–L98 (`overslash web` quickstart). Include verified-working `claude mcp add` invocation.
-- [ ] `guide/status-and-roadmap.md` — generate "What ships today" from `STATUS.md`. Confirm "What's planned" and "What's out of scope" with maintainers — `SPEC.md` is aspirational, not a roadmap promise.
+- [ ] `guide/status-and-roadmap.md` — generate "What ships today" from `STATUS.md`. Confirm "What's planned" and "What's out of scope" with maintainers — `SPEC.md` is aspirational, not a roadmap promise. **"What ships today" done (user-facing altitude); "What's planned" and "What's out of scope" left as stubs pending maintainer confirmation — see the `TODO (maintainer confirmation)` comments on the page.**
 
 ## guide/concepts/
 
