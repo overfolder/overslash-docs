@@ -72,18 +72,21 @@ app.post('/webhooks/overslash', express.raw({ type: '*/*' }), async (req, res) =
 ### Any language
 
 ```python
-import hashlib, hmac, time
+import hashlib, hmac, re, time
 
 def verify(raw_body: bytes, timestamp: str | None, signature: str | None, secret: str,
            tolerance: int = 300) -> bool:
-    if not timestamp or not timestamp.isdigit():
+    # ASCII digits only: str.isdigit() accepts e.g. "²", which int() rejects.
+    if not timestamp or not re.fullmatch(r"[0-9]+", timestamp):
         return False
     if abs(time.time() - int(timestamp)) > tolerance:
         return False
     expected = hmac.new(secret.encode(), timestamp.encode() + b"." + raw_body,
                         hashlib.sha256).hexdigest()
+    # Keep only hex digests: compare_digest raises on non-ASCII str input.
     candidates = [p.strip()[3:].lower() for p in (signature or "").split(",")
                   if p.strip().startswith("v1=")]
+    candidates = [c for c in candidates if re.fullmatch(r"[0-9a-f]+", c)]
     ok = False
     for c in candidates:  # no early exit
         ok = hmac.compare_digest(expected, c) or ok
