@@ -77,7 +77,7 @@ Sources of truth in `~/code/overfolder/overslash/`:
 - [ ] `rest-api/identities.md` — distinguish the `/me` shortcut from the full list endpoint; document role-based access. Source: `crates/overslash-api/src/routes/identities.rs`.
 - [ ] `rest-api/search.md` — define the query DSL (free text, category filters, capability filters). Source: `crates/overslash-api/src/routes/search.rs`.
 - [ ] `rest-api/audit.md` — list every event type written to the audit log. Source: `crates/overslash-core/src/audit/*`.
-- [ ] `rest-api/webhooks.md` — full signing scheme (HMAC algorithm, header names, replay protection), retry policy, and event payload shapes. Source: `crates/overslash-api/src/routes/webhooks.rs`.
+- [ ] `rest-api/webhooks.md` — retry policy, event payload shapes, and the endpoint-ownership handshake (signing & verification is done). Source: `crates/overslash-api/src/routes/webhooks.rs`.
 - [ ] `rest-api/oauth.md` — confirm the `.well-known` payloads we actually emit; add a worked end-to-end example (discovery → register → authorize → token). Source: `docs/design/mcp-oauth-transport.md` + `crates/overslash-api/src/routes/oauth.rs`.
 
 ### reference/mcp-tools/
