@@ -149,6 +149,7 @@ export default withMermaid(defineConfig({
           collapsed: false,
           items: [
             { text: 'Link Google services', link: '/guide/how-to/link-google-services' },
+            { text: 'Org-wide Google OAuth app', link: '/guide/how-to/org-google-oauth-app' },
             { text: 'Connect an MCP client', link: '/connect/' },
           ],
         },
@@ -183,6 +184,7 @@ export default withMermaid(defineConfig({
           text: 'Connect a service',
           items: [
             { text: 'Link Google services', link: '/guide/how-to/link-google-services' },
+            { text: 'Org-wide Google OAuth app', link: '/guide/how-to/org-google-oauth-app' },
           ],
         },
       ],
