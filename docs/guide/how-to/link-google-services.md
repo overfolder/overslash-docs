@@ -10,6 +10,10 @@ This is the **"use your own OAuth"** path. If your Overslash deployment already 
 
 See [Connections](../concepts/connections.md) for the underlying model and [Services & Actions](../concepts/services-and-actions.md) for how a connection becomes callable actions.
 
+::: tip Setting this up for your whole organization?
+If you're an org admin, especially on Google Workspace, set up **one org-wide app** instead of having each member bring their own. An **Internal** app needs no Google verification or CASA review, even for Gmail and Drive. See [Set up an org-wide Google OAuth app](./org-google-oauth-app.md).
+:::
+
 ::: tip Looking to connect a client instead?
 Want to connect to Overslash from Claude Code, Cursor, ChatGPT, or another tool so it can act as an agent? See [Connect to Overslash from an MCP client](../../connect/index.md).
 :::
@@ -66,7 +70,7 @@ A dedicated project keeps the OAuth app, its consent screen, and its quota isola
 
 1. In the left menu, go to **APIs & Services**.
 2. Open **Library**, search for **Google Calendar API**, and click **Enable**.
-3. Go to **OAuth consent screen**. Choose **External**, then fill in the required fields (app name, user support email, developer contact).
+3. Go to **OAuth consent screen**. Choose **External**, then fill in the required fields (app name, user support email, developer contact). If your account is part of a Google Workspace organization and only people in it will connect, you can choose **Internal** instead. Internal apps skip test users and Google verification; see [Internal or External?](./org-google-oauth-app.md#internal-or-external).
 4. Open **Data access** → **Add or remove scopes**, and add the Calendar scope:
 
    ```text
@@ -83,8 +87,10 @@ Connecting a different Google service? Enable the matching API and add its scope
 | **Google Calendar** | `https://www.googleapis.com/auth/calendar` |
 | **Google Drive** | `https://www.googleapis.com/auth/drive` |
 | **Gmail** | `https://www.googleapis.com/auth/gmail.readonly`, `…/gmail.send`, `…/gmail.modify`, `…/gmail.compose`, `…/gmail.metadata` |
+| **Google Tasks** | `https://www.googleapis.com/auth/tasks`, `…/tasks.readonly` |
+| **Google Keep** | `https://www.googleapis.com/auth/keep` |
 
-Gmail's `readonly`, `send`, and `modify` scopes are **restricted** under Google's verification regime and may require [CASA security assessment](https://support.google.com/cloud/answer/13464321) before you can use the app in production with real users. Test users are unaffected.
+Gmail's `readonly`, `modify`, `compose`, and `metadata` scopes, full `drive`, and `keep` are **restricted** under Google's verification rules. An External app needs a [CASA security assessment](https://support.google.com/cloud/answer/13464321) before real users can grant them. Test users are unaffected, and so are **Internal** apps.
 :::
 
 ## Step 5 — Create the OAuth client

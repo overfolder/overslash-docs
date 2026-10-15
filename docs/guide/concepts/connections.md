@@ -28,7 +28,7 @@ OAuth client credentials are scoped to a **provider**, not to an individual serv
 Where those client credentials come from is a three-tier cascade, resolved top-to-bottom with the first match winning:
 
 1. **User-level (BYOC)** — a user supplies their own OAuth app credentials, stored as secrets in their vault under well-known names like `OAUTH_GOOGLE_CLIENT_ID`. Lets a power user or contractor use their own cloud project without touching org config.
-2. **Org-level** — an org admin configures one OAuth app for the whole org. This is the recommended path for Google Workspace customers, since an Internal-tier OAuth app skips Google's brand-verification and CASA review.
+2. **Org-level** — an org admin configures one OAuth app for the whole org. This is the recommended path for Google Workspace customers, since an Internal-tier OAuth app skips Google's brand-verification and CASA review. See [Set up an org-wide Google OAuth app](../how-to/org-google-oauth-app.md).
 3. **Overslash system** — defaults managed by the instance operator, for consumer accounts and low-stakes scopes.
 
 If no credentials resolve at any tier, the connect flow stops with an explanation rather than a confusing provider-side error.
