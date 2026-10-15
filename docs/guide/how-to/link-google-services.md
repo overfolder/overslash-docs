@@ -91,6 +91,8 @@ Connecting a different Google service? Enable the matching API and add its scope
 | **Google Keep** | `https://www.googleapis.com/auth/keep` |
 
 Gmail's `readonly`, `modify`, `compose`, and `metadata` scopes, full `drive`, and `keep` are **restricted** under Google's verification rules. An External app needs a [CASA security assessment](https://support.google.com/cloud/answer/13464321) before real users can grant them. Test users are unaffected, and so are **Internal** apps.
+
+**Google Keep** is an enterprise API. It only works for Google Workspace accounts, and only after a Workspace super admin has authorized your OAuth client for the `keep` scope. See [Authorize the client for Google Keep](./org-google-oauth-app.md#step-5-authorize-the-client-for-google-keep-keep-only).
 :::
 
 ## Step 5 — Create the OAuth client

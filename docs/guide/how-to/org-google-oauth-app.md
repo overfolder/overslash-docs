@@ -34,7 +34,7 @@ Pick the audience before you start, because it decides almost everything else.
 | Requirement | The Google Cloud project must belong to your Workspace organization | Any Google Cloud project |
 
 ::: tip Use Internal if you can
-With **Internal**, Gmail, Drive, and Keep work for your whole team right away, and connections don't expire. Only choose External if some people who need to connect use accounts outside your Workspace domain, such as personal Gmail.
+With **Internal**, Gmail and Drive work for your whole team right away, and connections don't expire. Keep needs one extra step from your Workspace admin ([Step 5](#step-5-authorize-the-client-for-google-keep-keep-only)). Only choose External if some people who need to connect use accounts outside your Workspace domain, such as personal Gmail.
 :::
 
 ## Before you begin
@@ -124,7 +124,21 @@ With an **Internal** app, these classifications have no effect: Google doesn't r
 Paste it straight into Overslash in the next step. Don't send it over chat or email. If it leaks, rotate it in Google Cloud and update it in Overslash.
 :::
 
-## Step 5: Save the credentials in Overslash
+## Step 5: Authorize the client for Google Keep (Keep only)
+
+Skip this step if your org won't use Google Keep.
+
+Google treats the Keep API as an enterprise API. A consent screen alone isn't enough: a Workspace **super admin** has to authorize your OAuth client for the Keep scope. Until they do, Keep connections fail with `invalid_scope` or an access error, even with an Internal app.
+
+1. In the [Google Admin console](https://admin.google.com), go to **Security → Access and data control → API controls → Manage Domain Wide Delegation**.
+2. Click **Add new**.
+3. **Client ID**: the OAuth client ID from Step 4 (`…apps.googleusercontent.com`).
+4. **OAuth scopes**: `https://www.googleapis.com/auth/keep`
+5. Click **Authorize**. It can take a few minutes to take effect.
+
+Each member still connects their own Keep account through Overslash. This step only lets your OAuth client request the Keep scope in your domain. See Google's [Keep API authorization guide](https://developers.google.com/workspace/keep/api/guides).
+
+## Step 6: Save the credentials in Overslash
 
 1. In Overslash, go to **Org settings → OAuth App Credentials**.
 2. Click **Add provider credentials**, or **Override** if the Google row is currently served by the instance (`env`).
@@ -133,7 +147,7 @@ Paste it straight into Overslash in the next step. Don't send it over chat or em
 
 Overslash stores both values encrypted in your org's vault. Agents never see them, and the API never returns the secret.
 
-## Step 6: Test it
+## Step 7: Test it
 
 1. As a member of the org, connect a Google service, for example by creating a **Google Calendar** service from its template and choosing **Connect a new account**.
 2. Google's consent screen should show **your app's name**. With an Internal app there's no "unverified app" warning.
@@ -154,4 +168,5 @@ Overslash stores both values encrypted in your org's vault. Agents never see the
 - **"Internal" isn't offered under Audience**: the project doesn't belong to a Workspace organization. Create it under your organization (Step 1).
 - **`access_not_configured` or "API has not been used in project"**: enable the matching API (Step 2) in the same project as the client.
 - **Connections stopped working right after saving the org app**: they were made with the instance's default client. Reconnect them (see [What happens to existing connections](#what-happens-to-existing-connections)).
+- **Keep fails with `invalid_scope` or access denied** while other Google services work: the client isn't authorized for the Keep scope in your domain. Do [Step 5](#step-5-authorize-the-client-for-google-keep-keep-only).
 - **A connection stops working after about a week**: the app is **External** and still in testing, where Google expires refresh tokens after 7 days. Use an Internal app, or complete Google verification.
